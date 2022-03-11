@@ -28,14 +28,20 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  box-sizing: content-box;
 }
 
 /* This css is only applied when fullscreen is active. */
 .player:fullscreen {
   max-width: none;
   width: 100%;
-  border: none;
+  border: 20px transparent;
 }
+
+/* .player:fullscreen:hover .player__controls {
+  transform: translateY(100%) translateY(-5px);
+  transition: all 3s;
+} */
 
 .player:-webkit-full-screen {
   max-width: none;
@@ -60,6 +66,7 @@ body {
   display: flex;
   flex-direction: row;
   width: max-content;
+  min-width: 17px;
 }
 
 .player__button:focus {
@@ -85,9 +92,10 @@ body {
 .flex-row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex:auto;
   align-items: center;
+  flex-grow: 1;
 }
 
 .player:hover .player__controls {
@@ -127,8 +135,10 @@ body {
 input[type=range] {
   -webkit-appearance: none;
   background: transparent;
-  width: 100%;
-  margin: 0 5px;
+  width: calc(100% - 5rem);
+  margin-left: -1.5rem;
+  visibility: hidden;
+  transition: all .3s;
 }
 
 input[type=range]:focus {
@@ -185,4 +195,17 @@ input[type=range]::-moz-range-thumb {
   align-items: center;
   margin: 0 5px;
   font-size: small;
+}
+.player__button:hover + input {
+  visibility: visible;
+}
+
+.player__button:not(:hover) + input {
+  visibility: hidden;
+  transition: visibility 1s;
+}
+
+input[type=range]:hover {
+  visibility: visible;
+  transition:none;
 }

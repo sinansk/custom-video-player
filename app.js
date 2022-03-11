@@ -11,9 +11,21 @@ const playerControls = player.querySelector(".player__controls");
 const timeElapsed = document.getElementById('time-elapsed');
 const duration = document.getElementById('duration');
 const fullSizeIcon = player.querySelector(".fa-maximize");
-console.log(fullSizeIcon);
+const volumeBtn = player.querySelector(".fa-volume-high");
+// const volumeRange = player.querySelector(".volume")
+// const playbackRate = player.querySelector(".fa-gauge");
+
 
 ///FUNCTIONS////
+function mute() {
+    if (!video.muted) {
+        video.muted = true;
+        volumeBtn.classList.toggle("fa-volume-xmark")
+    } else {
+        video.muted = false;
+        volumeBtn.classList.remove("fa-volume-xmark")
+    } 
+};
 
 function togglePlay() {
  if (video.paused) {
@@ -53,8 +65,7 @@ function fullScreen() {
     if (!document.fullscreenElement) {
         fullSizeIcon.classList.toggle("fa-minimize");
         player.requestFullscreen();
-      var x =  player.getComputedStyle(player, ':hover .player__controls').content
-        console.log(x);
+        
     } else {
       if (document.exitFullscreen) {
         
@@ -66,7 +77,6 @@ function fullScreen() {
 
 function formatTime(timeInSeconds) {
     const result = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
-  
     return {
       minutes: result.substr(3, 2),
       seconds: result.substr(6, 2),
@@ -74,7 +84,6 @@ function formatTime(timeInSeconds) {
 };
 
 function initializeVideo() {
-    
     const videoDuration = Math.round(video.duration);
     const time = formatTime(videoDuration);
     console.log(duration.textContent)
@@ -83,13 +92,19 @@ function initializeVideo() {
 };
 
 function updateTimeElapsed() {
-   
     const time = formatTime(Math.round(video.currentTime));
     console.log(timeElapsed.textContent);
     timeElapsed.textContent = `${time.minutes}:${time.seconds}`;
     timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`)
 };
 
+function hideControls(e) {
+    if (document.fullscreenElement) {
+    
+    playerControls.style.transform = 'translateY(100%) translateY(-5px)';
+};
+
+};
 ///EVENT LISTENERS////
 
 video.addEventListener('click', togglePlay);
@@ -98,6 +113,10 @@ video.addEventListener('pause', updateButton);
 video.addEventListener('timeupdate', handleProgress);
 video.addEventListener('loadedmetadata', initializeVideo);
 video.addEventListener('timeupdate', updateTimeElapsed);
+
+// player.addEventListener('mouseout', hideControls);
+// let mouseout = false;
+// let mouseover = true;
 
 toggleBtn.addEventListener('click', togglePlay);
 skipButtons.forEach(button => button.addEventListener('click', skip));
@@ -109,12 +128,14 @@ progress.addEventListener('click', scrub);
 progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
 progress.addEventListener('mousedown', () => mousedown = true);
 progress.addEventListener('mouseup', () => mousedown = false);
-
 sizeBtn.addEventListener('click', fullScreen);
-
+volumeBtn.addEventListener('click', mute);
 document.addEventListener('keyup', event => {
     if (event.code === 'Space') {
         event.preventDefault();
         togglePlay()
     }
 });
+
+
+
