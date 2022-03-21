@@ -38,11 +38,6 @@ body {
   border: 20px transparent;
 }
 
-/* .player:fullscreen:hover .player__controls {
-  transform: translateY(100%) translateY(-5px);
-  transition: all 3s;
-} */
-
 .player:-webkit-full-screen {
   max-width: none;
   width: 100%;
@@ -63,10 +58,12 @@ body {
   padding: 0;
   cursor: pointer;
   margin:0 6px;
-  display: flex;
-  flex-direction: row;
-  width: max-content;
+  max-width: 35px;
   min-width: 17px;
+}
+
+.player__button:hover {
+  color:#ffc600;
 }
 
 .player__button:focus {
@@ -89,13 +86,46 @@ body {
   flex-wrap: wrap;
   background: rgba(0,0,0,0.1);
 }
-.flex-row {
+.flex-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 1 auto;
+}
+.flex-flex-space-evenly {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  flex:auto;
   align-items: center;
-  flex-grow: 1;
+  background-color:#bada55;
+}
+.flex-around {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.flex-flex-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: calc(((100% - 29.625px) / 2) -14.8125px);
+  max-width: 45%;
+  align-items: center;
+  flex: 1 1 auto;
+}
+.flex-flex-start>div {
+  display: flex;
+  flex: 1 1 1;
+}
+
+.flex-flex-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+  align-items: center;
 }
 
 .player:hover .player__controls {
@@ -129,16 +159,17 @@ body {
 }
 .toggle {
   min-width: 20px;
+  max-width: 25px;
 }
-/* unholy css to style input type="range" */
 
 input[type=range] {
   -webkit-appearance: none;
   background: transparent;
-  width: calc(100% - 5rem);
-  margin-left: -1.5rem;
+  max-width: 100px;
   visibility: hidden;
   transition: all .3s;
+  display: flex;
+  flex: 1 1 150px;
 }
 
 input[type=range]:focus {
@@ -191,13 +222,16 @@ input[type=range]::-moz-range-thumb {
 
 .time {
   display: flex;
+  align-content: center;
   justify-content: center;
+ 
   align-items: center;
-  margin: 0 5px;
+  /* margin: 0 5px; */
   font-size: small;
 }
 .player__button:hover + input {
   visibility: visible;
+  
 }
 
 .player__button:not(:hover) + input {
@@ -208,4 +242,13 @@ input[type=range]::-moz-range-thumb {
 input[type=range]:hover {
   visibility: visible;
   transition:none;
+}
+.volume {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+} 
+
+.volume:hover {
+  flex-basis: 150px;
 }

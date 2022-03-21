@@ -13,32 +13,36 @@
   <div class="player">
     <video class="player__video viewer" src="oceans.mp4"></video>
     <div class="player__controls">
-        <div class="progress">
-            <div class="progress__filled"></div>
-        </div>
-        <div class="flex-row">
-            <button class="player__button toggle" title="Toggle Play">►</button>
-            <div class="flex-row">
-              <button class="player__button"><i class="fa-solid fa-volume-high"></i></button>
-              <input type="range" name="volume" class="player__slider volume" min="0" max="1" step="0.05" value="1">
+      <div class="progress">
+        <div class="progress__filled"></div>
+      </div>
+      <div class="flex-space-between">
+        <div class="flex-flex-start">
+          <button class="player__button toggle" title="Toggle Play">►</button>
+          <div class="flex-flex-start">
+            <div class=" volume">
+              <button class="player__button "><i class="fa-solid fa-volume-high"></i></button>
+              <input type="range" name="volume" class="player__slider " min="0" max="1" step="0.05" value="1">
             </div>
-            <div class="time">
-                <span id="time-elapsed">00:00</span>
-                <span>/</span>
-                <span id="duration">00:00</span>
-            </div>
-            <div class="flex-row">
+            <div class="flex-flex-start playbackRate">
               <button class="player__button"><i class="fa-solid fa-gauge"></i></button>
               <input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1">
             </div>
-            
-            <div class="flex-row">
-                <button data-skip="-10" class="player__button">« 10s</button>
-                <button data-skip="25" class="player__button">25s »</button>
-            </div>
-            <button class="player__button full__size"><i class="fa-solid fa-maximize"></i></button>
+          </div>
         </div>
+        <div class="time">
+          <span id="time-elapsed">00:00</span>
+          <span>/</span>
+          <span id="duration">00:00</span>
+        </div>
+        <div class="flex-flex-end">
+          <button data-skip="-10" class="player__button">« 10s</button>
+          <button data-skip="25" class="player__button">25s »</button>
+          <button class="player__button full__size"><i class="fa-solid fa-maximize"></i></button>
+        </div>
+      </div>
     </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
